@@ -1,0 +1,172 @@
+
+chai_type: hello_world
+temparature : 0.7
+servings: 2
+brewing_time: 5
+# Comments start with a hash symbol
+
+chai_recipe:
+  base: black_tea
+  milk: whole_milk
+
+chai_recipe_two:
+  base: green_tea
+  milk: oat_milk
+
+# @Datatypes 
+
+# (STRING)
+
+chai_name: Masala chai
+description: "Chai with cardamon, ginger"
+tagline: 'The best chai ever'
+
+brewing_instructions: |
+  
+  1. Boil water
+  2. Add tea leaves and spices
+  3. Simmer for 5 minutes
+  4. Add milk and sugar
+  5. Bring to a boil again
+  6. Strain and serve hot
+  ready to drink Chai
+
+# (NUMBER)
+cups_per_serving: 1.5
+sugar_spoons: 2
+sugar_grams: 0xFF22FF
+
+# (FLOAT)
+temperature_celsius: 75.5
+
+# (BOOLEAN)
+is_vegan: false
+is_gluten_free: true
+is_fat_free: no
+is_keto: off
+
+# (NULL)
+special_note: null
+optional_ingredient: ~
+
+# (DATE)
+morning_tea_time: 2024-10-01
+evening_tea_time: 2024-10-01 08:30:01
+
+# (Collection) - List/Array
+ingredients:
+  - black_tea
+  - cardamom
+  - ginger
+  - milk
+  - sugar
+
+old_spices: [ nutmeg, cinnamon, pepper ] # Inline list 
+# very old method
+
+spices:
+  cardamom: 2
+  ginger: 1
+  cloves: 3
+
+# Nested Collections
+
+chai_categories:
+  - name: Masala chai
+    ingredients:
+      - black_tea
+      - cardamom
+      - ginger
+      - milk
+      - sugar
+    servings: 2
+    is_vegan: false
+  - name: Green chai
+    ingredients:
+      - green_tea
+      - mint
+      - lemon
+      - honey
+    servings: 1
+    is_vegan: true
+
+
+masala_chai:
+  ingredients:
+    tea: black_tea
+    spices:
+      water: 2 cups
+      cardamom: 2 pods
+      ginger: 1 inch piece
+      cloves: 3 pods
+    milk: whole_milk
+  preparation_steps:
+    method: Simmer
+    duration: 5 minutes
+
+chai_menu:
+  breakfast:
+    - name: Masala chai
+      price: 2.5
+      is_vegan: false
+    - name: Green chai
+      price: 3.0
+      is_vegan: true
+  afternoon_tea:
+    - name: Cardamom chai
+      price: 2.8
+      is_vegan: false
+    - name: Lemon ginger chai
+      price: 3.2
+      is_vegan: true
+
+
+# @Anchors and Aliases
+# Reuse parts of the YAML structure
+
+default_chai_base: &default_base
+  type: black_tea
+  brand: "Generic Tea Co."
+
+morning_chai:
+  <<: *default_base
+  milk: whole_milk
+  sugar: 2 spoons
+
+
+evening_chai:
+  <<: *default_base
+  milk: oat_milk
+  sugar: 1 spoon
+
+# @Complex Keys (similar to tuples in Python or ternary keys in other languages)
+
+complex_key_example:
+  ? 
+    - key_part_one
+    - key_part_two
+  : 
+    description: "This is a complex key made of a list"
+    value: 42
+
+# explicit data types
+
+explicit_integer: !!int "42"
+explicit_float: !!float "3.14"
+explicit_string: !!str 12345 # forces 12345 to be a string
+
+#NOTE: Why to force data types?
+# In YAML, data types are usually inferred automatically. However, there are scenarios where you might want to explicitly define a data type to avoid ambiguity or ensure consistency, such as:
+# 1. Preventing Misinterpretation: For example, a value like "00123" could be interpreted as an integer (123) or a string ("00123"). Explicitly defining it as a string ensures it retains its leading zeros.
+# 2. Ensuring Consistency: In configurations where a specific data type is required (e.g., a string for a username), explicitly defining the type helps maintain consistency across different environments or systems.
+# 3. Interoperability: When data is shared between different systems or programming languages, explicit data types can help ensure that the receiving system interprets the data correctly.
+
+
+
+# sets
+
+unique_ingredients: !!set
+  ? cardamom
+  ? ginger
+  ? cloves
+
